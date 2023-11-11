@@ -1,0 +1,215 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    transition: 0.7s;
+    padding: 30px 20px;
+    z-index: 10;
+    
+}
+header.abajo{
+    background: #ffffff;
+    padding: 15px 20px;
+    text-decoration: none;
+    
+}
+
+
+header .logo{
+    position: relative;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 2em;
+    letter-spacing: 2px;
+    transition: 1.5s;
+    text-decoration: none;
+    font-family: "Goudy Old Style";
+}
+.section {
+    background-image: url('images/fondo_metal.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+.section::before {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.6); /* Ajusta el valor alpha para cambiar la opacidad */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Estilos para el contenido de los div */
+.slider-text {
+    position: relative;
+    z-index: 1;
+    color: #ffffff; /* Ajusta el color del texto según tus preferencias */
+}
+
+.logo:hover {
+    color: rgb(5, 0, 57); /* Cambia el color a rojo al pasar el cursor por encima */
+    text-decoration: none;  
+}
+nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+header ul{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+
+header ul li{
+    list-style: none;
+}
+
+header ul li a{
+    position: relative;
+    font-family: helvetica;
+    margin: 0 15px;
+    text-decoration: none;
+    color: #110050;
+    letter-spacing: 2px;
+    font-weight: 600;
+    transition: 0.7s;
+}
+
+
+header.abajo .logo,
+header.abajo ul li a{
+    color: #c8a97e;
+    text-decoration: none;
+}
+
+.subtitle1 {
+    font-family: "Great Vibes", cursive;
+    font-size:x-large;
+    color: #c8a97e;
+}
+
+.subtitle2 {
+    font-family: "Great Vibes", cursive;
+    font-size:x-large;
+    color: #c8a97e;
+}
+
+.subtitle3 {
+    font-family: "Great Vibes", cursive;
+    font-size:x-large;
+    color: #c8a97e;
+}
+
+.instagram{
+    text-decoration: none;
+    color:#0a0040;
+}
+.direccion{
+    text-decoration: none; 
+    color:#0a0040;
+}
+.geo {
+    color:#0a0040;
+}
+
+
+/* menu */
+
+
+
+/* items del menu */
+
+
+
+/* enlaces del menu */
+
+#menu ul a {
+display:block;
+color:#90c8f6;
+text-decoration:none;
+font-weight:400;
+font-size:15px;
+padding:10px;
+font-family: "Goudy Old Style";
+text-transform:uppercase;
+letter-spacing:1px;
+}
+
+/* items del menu */
+
+#menu ul li {
+position:relative;
+float:left;
+margin:0;
+padding:0;
+}
+
+/* efecto al pasar el ratón por los items del menu */
+
+#menu ul li:hover {
+background:#0a0040;
+}
+
+
+
+
+
+
+
+
+
+/* menu desplegable */
+
+#menu ul ul {
+display:none;
+position:absolute;
+top:100%;
+left:0;
+background:#ffffff;
+padding:0;
+}
+
+/* items del menu desplegable */
+
+#menu ul ul li {
+float:none;
+width:150px
+}
+
+/* enlaces de los items del menu dzesplegable */
+
+#menu ul ul a {
+line-height:120%;
+padding:10px 15px;
+}
+
+/* items del menu desplegable al pasar el ratón */
+
+#menu ul li:hover > ul {
+display:block;
+}
+
+
+
+
+
+
+
