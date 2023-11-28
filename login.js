@@ -5,7 +5,7 @@ const btnLogIn = document.querySelector("#btnLogIn");
 btnLogIn.addEventListener("click", async () => {
   const valueUsername = username.value;
   const valuePassword = password.value;
-  const urlApiLogin = "http://localhost:3000/login";
+  const urlApiLogin = "https://colchagua.onrender.com/login";
   const res = await fetch(urlApiLogin, {
     method: "POST",
     headers: {

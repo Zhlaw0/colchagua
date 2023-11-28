@@ -15,7 +15,7 @@ btnRegister.addEventListener("click", async () => {
     password: password.value,
     username: username.value,
   };
-  const urlApiLogin = "http://localhost:3000/guardar";
+  const urlApiLogin = "https://colchagua.onrender.com/guardar";
   const res = await fetch(urlApiLogin, {
     method: "POST",
     headers: {
