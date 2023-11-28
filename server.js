@@ -1,15 +1,25 @@
 const express = require("express");
+const functions = require("firebase-functions");
+require("dotenv").config();
 const app = express();
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 const session = require("express-session");
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({ secret: "mysecretkey", resave: true, saveUninitialized: true }));
+app.use(express.json());
+app.use(express.static("public"));
+app.use(
+  session({
+    secret: process.env.SECRET_KEY,
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
-mongoose.connect("mongodb+srv://mauricio:Santiago241@usuarios.kb2i0sp.mongodb.net/Usuarios", {
+mongoose.connect(process.env.MONGO_DB, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  connectTimeoutMS: 5000,
+  socketTimeoutMS: 5000,
+  useUnifiedTopology: true,
 });
 
 const registroSchema = {
@@ -18,53 +28,67 @@ const registroSchema = {
   direccion: String,
   email: String,
   password: String,
-  username: String
+  username: String,
 };
 
 const Registro = mongoose.model("Registro", registroSchema);
 
 app.use(express.static(__dirname));
 
-app.get("/", function(req, res) {
+app.get("/", function (req, res) {
   res.sendFile(__dirname + "/Formulario.html");
 });
 
-app.post("/guardar", function(req, res) {
-  const newRegistro = new Registro({
+app.post("/guardar", (req, res) => {
+  const dataInsert = {
     nombre: req.body.nombre,
     telefono: req.body.telefono,
     direccion: req.body.direccion,
     email: req.body.email,
     password: req.body.password,
-    username: req.body.username
-  });
-
+    username: req.body.username,
+  };
+  const newRegistro = new Registro(dataInsert);
   newRegistro
     .save()
     .then(() => {
-      console.log("Registro guardado en la base de datos");
-      res.redirect("/login");
+      res.status(200).json({
+        message: "Registro guardado en la base de datos",
+      });
     })
     .catch((err) => {
-      console.log("Error al guardar el registro en la base de datos: " + err);
-      // Puedes agregar una respuesta de error aquí si es necesario
+      res.status(200).json({
+        messageError: `Error al guardar el registro en la base de datos: ${err}`,
+      });
     });
 });
 
-app.get("/login", function(req, res) {
+app.get("/login", function (req, res) {
   res.sendFile(__dirname + "/login.html");
 });
 
-app.post("/login", function(req, res) {
+app.post("/login", function (req, res) {
   const { username, password } = req.body;
-
-  Registro.findOne({ username: username, password: password })
+  Registro.findOne({ username: username })
     .then((user) => {
-      if (user) {
+      if (password !== user.password) {
+        res.status(200).json({
+          login: true,
+          message: "Contraseña incorrecto",
+        });
+        return;
+      }
+      if (user && password === user.password) {
         req.session.user = user;
-        res.redirect("/");
+        res.status(200).json({
+          login: true,
+          message: "Login correcto",
+        });
       } else {
-        res.redirect("/login?error=1");
+        res.status(500).json({
+          login: false,
+          message: "Login incorrecto",
+        });
       }
     })
     .catch((err) => {
@@ -73,10 +97,8 @@ app.post("/login", function(req, res) {
     });
 });
 
-app.listen(3000, function() {
+app.listen(3000, function () {
   console.log("Servidor en ejecución en el puerto 3000");
 });
 
-
-
-
+exports.webApp = functions.https.onRequest(app);
