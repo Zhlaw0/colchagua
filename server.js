@@ -4,6 +4,7 @@ require("dotenv").config();
 const app = express();
 const mongoose = require("mongoose");
 const session = require("express-session");
+const bcrypt = require("bcryptjs");
 
 app.use(express.json());
 app.use(express.static("public"));
@@ -39,13 +40,21 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + "/Formulario.html");
 });
 
-app.post("/guardar", (req, res) => {
+app.post("/guardar", async (req, res) => {
+  const user = await Registro.findOne({ email: req.body.email });
+  if (user) {
+    return res.status(200).json({
+      message: "El usuario ya existe.",
+    });
+  }
+  const salt = await bcrypt.genSalt(10);
+  const hashPassword = await bcrypt.hashSync(req.body.password, salt);
   const dataInsert = {
     nombre: req.body.nombre,
     telefono: req.body.telefono,
     direccion: req.body.direccion,
     email: req.body.email,
-    password: req.body.password,
+    password: hashPassword,
     username: req.body.username,
   };
   const newRegistro = new Registro(dataInsert);
