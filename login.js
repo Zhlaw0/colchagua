@@ -5,14 +5,14 @@ const btnLogIn = document.querySelector("#btnLogIn");
 btnLogIn.addEventListener("click", async () => {
   const valueUsername = username.value;
   const valuePassword = password.value;
-  const urlApiLogin = "https://colchagua.onrender.com/login";
+  const urlApiLogin = "http://localhost:3000/login";
   const res = await fetch(urlApiLogin, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      username: valueUsername,
+      email: valueUsername,
       password: valuePassword,
     }),
   });
@@ -21,6 +21,6 @@ btnLogIn.addEventListener("click", async () => {
   if (login) {
     window.location.assign("/");
   } else {
-    alert("Error al iniciar sesion");
+    // alert("Error al iniciar sesion");
   }
 });

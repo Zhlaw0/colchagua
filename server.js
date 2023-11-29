@@ -76,34 +76,31 @@ app.get("/login", function (req, res) {
   res.sendFile(__dirname + "/login.html");
 });
 
-app.post("/login", function (req, res) {
-  const { username, password } = req.body;
-  Registro.findOne({ username: username })
-    .then((user) => {
-      if (password !== user.password) {
-        res.status(200).json({
-          login: true,
-          message: "Contraseña incorrecto",
-        });
-        return;
-      }
-      if (user && password === user.password) {
-        req.session.user = user;
-        res.status(200).json({
-          login: true,
-          message: "Login correcto",
-        });
-      } else {
-        res.status(500).json({
-          login: false,
-          message: "Login incorrecto",
-        });
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.redirect("/login");
-    });
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await Registro.findOne({ email });
+    if (!user) {
+      return res.status(200).json({
+        login: false,
+        message: "Usuario no existe",
+      });
+    }
+    const isCorrectPassword = bcrypt.compareSync(password, user.password);
+    if (isCorrectPassword) {
+      return res.status(200).json({
+        login: true,
+        message: "Login correcto",
+      });
+    } else {
+      return res.status(200).json({
+        login: false,
+        message: "La contraseña es invalida.",
+      });
+    }
+  } catch (error) {
+    res.redirect("/login");
+  }
 });
 
 app.listen(3000, function () {
