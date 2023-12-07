@@ -17,10 +17,11 @@ btnLogIn.addEventListener("click", async () => {
     }),
   });
   const response = await res.json();
-  const { login } = response;
+  const { login, token } = response;
   if (login) {
+    localStorage.setItem("token", token);
     window.location.assign("/");
   } else {
-    // alert("Error al iniciar sesion");
+    alert("Error al iniciar sesion");
   }
 });
