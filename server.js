@@ -5,6 +5,7 @@ const app = express();
 const mongoose = require("mongoose");
 const session = require("express-session");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 app.use(express.json());
 app.use(express.static("public"));
@@ -30,6 +31,7 @@ const registroSchema = {
   email: String,
   password: String,
   username: String,
+  admin: Boolean,
 };
 
 const Registro = mongoose.model("Registro", registroSchema);
@@ -56,6 +58,7 @@ app.post("/guardar", async (req, res) => {
     email: req.body.email,
     password: hashPassword,
     username: req.body.username,
+    admin: req.body.admin,
   };
   const newRegistro = new Registro(dataInsert);
   newRegistro
@@ -84,24 +87,50 @@ app.post("/login", async (req, res) => {
       return res.status(200).json({
         login: false,
         message: "Usuario no existe",
+        token: null,
       });
     }
     const isCorrectPassword = bcrypt.compareSync(password, user.password);
     if (isCorrectPassword) {
-      return res.status(200).json({
-        login: true,
-        message: "Login correcto",
-      });
+      const payload = {
+        user: {
+          id: user.id,
+          email: user.email,
+          admin: user.admin,
+        },
+      };
+      jwt.sign(
+        payload,
+        process.env.SECRET_PASS,
+        {
+          expiresIn: 3600,
+        },
+        (error, token) => {
+          if (error) throw error;
+          res.status(200).json({
+            token,
+            login: true,
+            message: "Login correcto",
+          });
+        }
+      );
     } else {
       return res.status(200).json({
         login: false,
         message: "La contraseña es invalida.",
+        token: null,
       });
     }
   } catch (error) {
-    res.redirect("/login");
+    res.status(500).json({
+      message: "Error al iniciar sesión.",
+      login: false,
+      token: null,
+    });
   }
 });
+
+app.get("/getUser");
 
 app.listen(3000, function () {
   console.log("Servidor en ejecución en el puerto 3000");

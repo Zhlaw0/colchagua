@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="estilo.css" />
+    <title>Brasas Colchagua</title>
+    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./css/shop.css" />
+  </head>
+  <body>
+    <header>
+      <a href="index.html">
+        <!-- Agregamos un enlace alrededor del logotipo -->
+        <img
+          src="images\logooo.png"
+          width="90"
+          height="90"
+          class="logo d-flex justify-content-center"
+          alt="Logotipo"
+        />
+      </a>
+      <nav id="menu">
+        <ul>
+          <li><a href="login.html">Perfil</a></li>
+          <li><a href="#nosotros">Contactenos</a></li>
+        </ul>
+      </nav>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      />
+      <link rel="stylesheet" href="./css/owl.carousel.min.css" />
+
+      <link rel="stylesheet" href="./css/aos.css" />
+
+      <link
+        rel="stylesheet"
+        href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+      />
+
+      <link rel="stylesheet" href="./css/bootstrap-datepicker.css" />
+
+      <link rel="stylesheet" href="./css/style.css" />
+    </header>
+
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <section class="contenedor">
+      <!-- Contenedor de elementos -->
+      <div class="contenedor-items">
+        <div class="item">
+          <span class="titulo-item">Parrilla con Mesa </span>
+          <img src="images/ParrillaMesa.jpg" alt="" class="img-item" />
+          <span class="precio-item">$200.000</span>
+          <button class="boton-item">Agregar al Carrito</button>
+          <div id="admin"></div>
+        </div>
+        <div class="item">
+          <span class="titulo-item">Horno de barro</span>
+          <img src="images/HornoBarro.jpg" alt="" class="img-item" />
+          <span class="precio-item">$300.000</span>
+          <button class="boton-item">Agregar al Carrito</button>
+          <div id="admin"></div>
+        </div>
+        <div class="item">
+          <span class="titulo-item">Parrilla con tapa</span>
+          <img src="images/ParillaTapa.jpg" alt="" class="img-item" />
+          <span class="precio-item">$180.000</span>
+          <button class="boton-item">Agregar al Carrito</button>
+          <div id="admin"></div>
+        </div>
+
+        <div class="item">
+          <span class="titulo-item">Trabajos Personalizados / A medida</span>
+          <img src="images/Personalizado.jpg" alt="" class="img-item" />
+          <span class="precio-item"></span>
+          <br />
+          <button
+            class="button"
+            onclick="window.location.href='#nosotros'"
+            style="background-color: rgba(182, 219, 247, 255)"
+          >
+            Cuentanos tu idea y cotiza con nosotros
+          </button>
+          <div id="admin"></div>
+        </div>
+      </div>
+
+      <!-- Carrito de Compras -->
+      <div class="carrito" id="carrito">
+        <div class="header-carrito">
+          <h2>Tu Carrito</h2>
+        </div>
+
+        <div class="carrito-items"></div>
+        <div class="carrito-total">
+          <div class="fila">
+            <strong>Total</strong>
+            <span class="carrito-precio-total"> $120.000,00 </span>
+          </div>
+          <button class="btn-pagar">
+            Pagar <i class="fa-solid fa-bag-shopping"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div class="col-md-12 col-sm-12 text-center ftco-animate">
+      <span class="subtitle1">Brasas Colchagua</span>
+      <p>
+        En Brasas Colchagua, nos esforzamos por ofrecer productos de alta
+        calidad a precios competitivos. Sin embargo, es importante tener en
+        cuenta que los precios de nuestros productos pueden variar debido a
+        fluctuaciones en los costos de los materiales y otros factores
+        relacionados.
+      </p>
+      <p>
+        Estamos comprometidos a brindarte transparencia en nuestros precios y a
+        informarte sobre cualquier cambio significativo. Si tienes alguna
+        pregunta sobre los precios de nuestros productos o necesitas una
+        cotización actualizada, no dudes en contactarnos.
+      </p>
+    </div>
+
+    <!-- footer section starts -->
+    <section
+      class="ftco-footer ftco-bg-dark ftco-section"
+      id="nosotros"
+      style="background-color: rgba(182, 219, 247, 255)"
+    >
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-6 col-lg-3">
+            <div class="ftco-footer-widget mb-4">
+              <br /><br />
+              <h2 class="ftco-heading-2">Contáctenos</h2>
+              <h3>
+                brasas_c@gmail.com
+                <br /><br />
+                +56 959890896
+                <br /><br />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25"
+                  height="30"
+                  fill="currentColor"
+                  class="geo"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"
+                  />
+                  <path
+                    d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+                  />
+                </svg>
+                <a
+                  href="https://maps.app.goo.gl/bbgTVtGBxkvwKNbt9"
+                  class="direccion"
+                  >Colchagua Chépica, región de O'Higgins</a
+                >
+              </h3>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="ftco-footer-widget mb-4">
+              <br /><br />
+              <h2 class="ftco-heading-2">Instagram</h2>
+              <h3>
+                <a
+                  href="https://www.instagram.com/brasascolchagua/"
+                  class="instagram"
+                  >brasas_colchagua</a
+                >
+              </h3>
+              <div class="thumb d-sm-flex">
+                <a
+                  href="#"
+                  class="thumb-menu img"
+                  style="background-image: url(images/1.jpg)"
+                ></a>
+                <a
+                  href="#"
+                  class="thumb-menu img"
+                  style="background-image: url(images/2.jpg)"
+                ></a>
+                <a
+                  href="#"
+                  class="thumb-menu img"
+                  style="background-image: url(images/3.jpg)"
+                ></a>
+              </div>
+              <div class="thumb d-sm-flex">
+                <a
+                  href="#"
+                  class="thumb-menu img"
+                  style="background-image: url(images/4.jpg)"
+                ></a>
+                <a
+                  href="#"
+                  class="thumb-menu img"
+                  style="background-image: url(images/5.jpg)"
+                ></a>
+                <a
+                  href="#"
+                  class="thumb-menu img"
+                  style="background-image: url(images/p6.jpg)"
+                ></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="ftco-footer-widget mb-4">
+              <br /><br />
+              <h2 class="ftco-heading-2">¿Quiénes somos?</h2>
+              <h3>
+                Somos una empresa especializada en la fabricación de parrillas
+                de acero inoxidable.
+              </h3>
+              <form action="#" class="subscribe-form">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control mb-2 text-center"
+                    placeholder="brasas_c@gmail.com"
+                  />
+                  <input
+                    type="submit"
+                    value="Suscríbete"
+                    class="form-control submit px-3"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer section ends -->
+
+    <!-- scripts -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.timepicker.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/shop.js" async></script>
+
+    <script type="text/javascript">
+      window.addEventListener("scroll", function () {
+        var header = document.querySelector("header");
+        header.classList.toggle("abajo", window.scrollY > 0);
+      });
+    </script>
+  </body>
+</html>

@@ -14,6 +14,7 @@ btnRegister.addEventListener("click", async () => {
     email: email.value,
     password: password.value,
     username: username.value,
+    admin: false,
   };
   const urlApiLogin = "https://colchagua.onrender.com/guardar";
   const res = await fetch(urlApiLogin, {
@@ -30,3 +31,6 @@ btnRegister.addEventListener("click", async () => {
     //alert("Error al registrar usuario");
   }
 });
+
+/*
+ */
