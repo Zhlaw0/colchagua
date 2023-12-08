@@ -128,9 +128,8 @@ AOS.init({
           direction === "down" &&
           !$(this.element).hasClass("ftco-animated")
         ) {
-          var comma_seperator_number_step = $.animateNumber.numberStepFactories.separator(
-            ","
-          );
+          var comma_seperator_number_step =
+            $.animateNumber.numberStepFactories.separator(",");
           $(".number").each(function () {
             var $this = $(this),
               num = $this.data("number");

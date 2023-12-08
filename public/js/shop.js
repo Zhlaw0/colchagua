@@ -204,7 +204,6 @@ function actualizarTotalCarrito() {
       precioElemento.innerText.replace("$", "").replace(".", "")
     );
     var cantidadItem = item.getElementsByClassName("carrito-item-cantidad")[0];
-    console.log(precio);
     var cantidad = cantidadItem.value;
     total = total + precio * cantidad;
   }
@@ -214,26 +213,79 @@ function actualizarTotalCarrito() {
     "$" + total.toLocaleString("es") + ",00";
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  const urlApiLogin = "http://localhost:3000/obtenerProductos";
+  const res = await fetch(urlApiLogin, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const { products } = await res.json();
+  const contenedorItems = document.querySelector(".contenedor-items");
+  products.forEach((el) => {
+    const divElement = document.createElement("div");
+    divElement.classList.add("item");
+    divElement.innerHTML = `
+            <p class="idProduct-${el.id}"></p>
+            <span class="titulo-item">${el.title}</span>
+            <span class="precio-item">Precio: ${el.precio}</span>
+            <button class="boton-item">Agregar al Carrito</button>
+
+          <div id="admin"></div>
+        `;
+    contenedorItems.appendChild(divElement);
+  });
+  const divElementLast = document.createElement("div");
+  divElementLast.classList.add("item");
+  divElementLast.innerHTML = `<span class="titulo-item">Trabajos Personalizados / A medida</span>
+  <img src="images/Personalizado.jpg" alt="" class="img-item" />
+  <span class="precio-item"></span>
+  <br />
+  <button
+    class="button"
+    onclick="window.location.href='#nosotros'"
+    style="background-color: rgba(182, 219, 247, 255)"
+  >
+    Cuentanos tu idea y cotiza con nosotros
+  </button>`;
+  contenedorItems.appendChild(divElementLast);
+
   const token = localStorage.getItem("token");
   const botonesAdmin = document.querySelectorAll("#admin");
   const { user } = parseJwt(token);
-
   if (user.admin) {
-    botonesAdmin.forEach((el) => {
-      el.innerHTML = `<button class="boton-item btnUpdate">Modificar Producto</button>`;
+    botonesAdmin.forEach((el, index) => {
+      el.innerHTML = `<button class="boton-item btnUpdate" id="button-${index}">Modificar Producto</button>`;
     });
   }
   const buttonUpdate = document.querySelectorAll(".btnUpdate");
-  console.log(buttonUpdate);
   buttonUpdate.forEach((el) => {
     el.addEventListener("click", () => {
+      const arrayButtons = Object.entries(buttonUpdate);
+      let btnData = {};
+      for (let i = 0; i < arrayButtons.length; i++) {
+        if (arrayButtons[i][1].id === el.id) {
+          btnData = arrayButtons[i][1];
+        }
+      }
+      const elementDiv = btnData.parentElement.parentElement;
+
+      const id = elementDiv.querySelector("p").classList["value"].split("-")[1];
+      const title = elementDiv.querySelector(".titulo-item").textContent;
+      const precio = elementDiv.querySelector(".precio-item").textContent;
+      const dataSend = {
+        title,
+        precio,
+        id: parseInt(id),
+      };
+      localStorage.setItem("dataSend", JSON.stringify(dataSend));
       window.location.assign("modificar-productos.html");
     });
   });
 });
 
-function parseJwt(token) {
+const parseJwt = (token) => {
   let base64Url = token.split(".")[1];
   let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
   let jsonPayload = decodeURIComponent(
@@ -247,4 +299,12 @@ function parseJwt(token) {
   );
 
   return JSON.parse(jsonPayload);
-}
+};
+
+const btnClose = document.querySelector("#btnClose");
+
+btnClose.addEventListener("click", () => {
+  localStorage.removeItem("dataSend");
+  localStorage.removeItem("token");
+  window.location.assign("/");
+});

@@ -1,98 +1,96 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
-*{ 
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');   
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        width: 100%;
-        background: url('images/fondo.jpg')no-repeat;
-        background-position: center;
-        background-size: cover;
-    }
-
-
-.container{
-    position: relative;
-    max-width: 500px;
-    width: 500px;
-    padding: 50px;
-    border-radius: 20px;
-    border: 2px solid #084370;
-    background: transparent;
-    backdrop-filter: blur(15px);
-    justify-content: center;
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background: url("../../images/fondo.jpg") no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
-
-h3{
-    font-size: 3em;
-    color: #003358;
-    text-align: center;
-    font-family: "Goudy Old Style";
+.container {
+  position: relative;
+  max-width: 500px;
+  width: 500px;
+  padding: 50px;
+  border-radius: 20px;
+  border: 2px solid #084370;
+  background: transparent;
+  backdrop-filter: blur(15px);
+  justify-content: center;
 }
 
-.inputbox{
-    position: relative;
-    margin: 30px 0;
-    width: auto;
-    border-bottom: 2px solid #215882;
+h3 {
+  font-size: 3em;
+  color: #003358;
+  text-align: center;
+  font-family: "Goudy Old Style";
 }
-.inputbox label{
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
-    color: #000000;
-    font-size: 1em;
-    pointer-events: none;
-    transition: .5s;
+
+.inputbox {
+  position: relative;
+  margin: 30px 0;
+  width: auto;
+  border-bottom: 2px solid #215882;
+}
+.inputbox label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  color: #000000;
+  font-size: 1em;
+  pointer-events: none;
+  transition: 0.5s;
 }
 input:focus ~ label,
-input:valid ~ label{
-top: -5px;
+input:valid ~ label {
+  top: -5px;
 }
 .inputbox input {
-    width: 100%;
-    height: 50px;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-size: 1em;
-    padding:0 35px 0 5px;
-    color: #092757;
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  padding: 0 35px 0 5px;
+  color: #092757;
 }
-button{
-    width: 100%;
-    height: 40px;
-    border-radius: 40px;
-    background: #00407054;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 600;
+button {
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  background: #00407054;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
 }
 
-.boton1{
-    text-decoration: none;
-    color: #145b91;
+.boton1 {
+  text-decoration: none;
+  color: #145b91;
 }
 
 @media screen and (max-width: 500px) {
-    .form .column {
-      flex-wrap: wrap;
-    }
-    .form :where(.gender-option, .gender) {
-      row-gap: 15px;
-    }
+  .form .column {
+    flex-wrap: wrap;
   }
+  .form :where(.gender-option, .gender) {
+    row-gap: 15px;
+  }
+}

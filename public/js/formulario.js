@@ -6,6 +6,12 @@ const username = document.querySelector("#username");
 const password = document.querySelector("#password");
 const btnRegister = document.querySelector("#btnRegister");
 
+const token = localStorage.getItem("token");
+const { user } = parseJwt(token);
+if (!user.admin || token === null) {
+  window.location.assign("/shop.html");
+}
+
 btnRegister.addEventListener("click", async () => {
   const dataObj = {
     nombre: nameUser.value,
@@ -16,7 +22,7 @@ btnRegister.addEventListener("click", async () => {
     username: username.value,
     admin: false,
   };
-  const urlApiLogin = "https://colchagua.onrender.com/guardar";
+  const urlApiLogin = "http://localhost:3000/guardar";
   const res = await fetch(urlApiLogin, {
     method: "POST",
     headers: {
@@ -26,11 +32,10 @@ btnRegister.addEventListener("click", async () => {
   });
   const response = await res.json();
   if (response.message) {
-    // window.location.assign("/");
+    window.location.assign("/");
   } else {
     //alert("Error al registrar usuario");
   }
 });
-
 /*
  */

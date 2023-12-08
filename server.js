@@ -132,6 +132,77 @@ app.post("/login", async (req, res) => {
 
 app.get("/getUser");
 
+// Productos
+
+const productosSchema = {
+  title: String,
+  precio: Number,
+  id: Number,
+};
+
+const Productos = mongoose.model("Productos", productosSchema);
+
+app.post("/guardarProducto", async (req, res) => {
+  try {
+    const { title } = req.body;
+    const product = await Productos.findOne({ title });
+    if (product) {
+      return res.status(200).json({
+        message: "Producto ya existe",
+      });
+    }
+    const newRegistro = new Productos(req.body);
+    newRegistro
+      .save()
+      .then(() => {
+        res.status(200).json({
+          message: "Registro guardado en la base de datos",
+        });
+      })
+      .catch((err) => {
+        res.status(200).json({
+          messageError: `Error al guardar el registro en la base de datos: ${err}`,
+        });
+      });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error al guardar producto.",
+    });
+  }
+});
+
+app.get("/obtenerProductos", async (_, res) => {
+  try {
+    const products = await Productos.find();
+    return res.status(200).json({
+      products,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error al obtener producto.",
+      error,
+    });
+  }
+});
+
+app.post("/modificarProducto", async (req, res) => {
+  try {
+    const { id, title, precio } = req.body;
+    let product = await Productos.findOne({ id });
+    product.title = title;
+    product.precio = precio;
+    await product.save();
+    return res.status(200).json({
+      message: "Producto modificado correctamente.",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error al modificar producto.",
+      error,
+    });
+  }
+});
+
 app.listen(3000, function () {
   console.log("Servidor en ejecución en el puerto 3000");
 });
