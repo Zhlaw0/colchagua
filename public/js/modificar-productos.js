@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnUpdate = document.querySelector("#btnUpdate");
 
   btnUpdate.addEventListener("click", async () => {
-    const urlApiLogin = "http://localhost:3000/modificarProducto";
+    const urlApiLogin = "https://brasas-colchagua.onrender.com/modificarProducto";
     const res = await fetch(urlApiLogin, {
       method: "POST",
       headers: {

@@ -22,7 +22,7 @@ btnRegister.addEventListener("click", async () => {
     username: username.value,
     admin: false,
   };
-  const urlApiLogin = "http://localhost:3000/guardar";
+  const urlApiLogin = "https://brasas-colchagua.onrender.com/guardar";
   const res = await fetch(urlApiLogin, {
     method: "POST",
     headers: {
