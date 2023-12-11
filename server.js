@@ -4,9 +4,7 @@ require("dotenv").config();
 const app = express();
 const mongoose = require("mongoose");
 const session = require("express-session");
-const MongoStore = require("connect-mongo").default; // Importa connect-mongo
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const MongoStore = require("connect-mongo");
 
 app.use(express.json());
 app.use(express.static("public"));
@@ -30,13 +28,17 @@ const registroSchema = {
 
 const Registro = mongoose.model("Registro", registroSchema);
 
+const sessionStore = MongoStore.create({
+  mongoUrl: process.env.MONGO_DB,
+  mongooseConnection: mongoose.connection,
+});
+
 app.use(
   session({
     secret: process.env.SECRET_KEY,
     resave: true,
     saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: process.env.MONGO_DB }), // Configura el almacenamiento de sesiones con connect-mongo
-
+    store: sessionStore, // Configura el almacenamiento de sesiones con connect-mongo
   })
 );
 
