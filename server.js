@@ -9,14 +9,15 @@ const MongoStore = require("connect-mongo");
 app.use(express.json());
 app.use(express.static("public"));
 
-mongoose.connect(
-  "mongodb+srv://fhuenumilla:12345@cluster0.68kfpt6.mongodb.net/?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true, // Add this line to avoid deprecation warning
-  }
-);
+mongoose.connect(process.env.MONGO_DB, {
+  useNewUrlParser: true,
+  connectTimeoutMS: 5000,
+  socketTimeoutMS: 5000,
+  useUnifiedTopology: true,
+  useCreateIndex: true, // Add this line
+});
+
+
 
 const registroSchema = {
   nombre: String,
@@ -41,9 +42,11 @@ app.use(
     secret: process.env.SECRET_KEY,
     resave: true,
     saveUninitialized: true,
-    store: sessionStore, // Configura el almacenamiento de sesiones con connect-mongo
+    store: sessionStore,
+    secret: process.env.SECRET_KEY, // Add this line
   })
 );
+
 
 app.use(express.static(__dirname));
 
