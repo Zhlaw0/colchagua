@@ -9,12 +9,14 @@ const MongoStore = require("connect-mongo");
 app.use(express.json());
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGO_DB, {
-  useNewUrlParser: true,
-  connectTimeoutMS: 5000,
-  socketTimeoutMS: 5000,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "mongodb+srv://fhuenumilla:12345@cluster0.68kfpt6.mongodb.net/?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true, // Add this line to avoid deprecation warning
+  }
+);
 
 const registroSchema = {
   nombre: String,
@@ -29,7 +31,8 @@ const registroSchema = {
 const Registro = mongoose.model("Registro", registroSchema);
 
 const sessionStore = MongoStore.create({
-  mongoUrl: process.env.MONGO_DB,
+  mongoUrl:
+    "mongodb+srv://fhuenumilla:12345@cluster0.68kfpt6.mongodb.net/?retryWrites=true&w=majority",
   mongooseConnection: mongoose.connection,
 });
 
