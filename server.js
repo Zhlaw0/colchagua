@@ -4,8 +4,7 @@ require("dotenv").config();
 const app = express();
 const mongoose = require("mongoose");
 const session = require("express-session");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const MongoStore = require("connect-mongo")(session); // Agrega connect-mongo
 
 app.use(express.json());
 app.use(express.static("public"));
@@ -14,6 +13,7 @@ app.use(
     secret: process.env.SECRET_KEY,
     resave: true,
     saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }), // Usa connect-mongo para almacenar sesiones en MongoDB
   })
 );
 
