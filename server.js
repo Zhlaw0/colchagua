@@ -4,7 +4,7 @@ require("dotenv").config();
 const app = express();
 const mongoose = require("mongoose");
 const session = require("express-session");
-const MongoStore = require("connect-mongo")(session); // Importa connect-mongo
+const MongoStore = require("connect-mongo").default; // Importa connect-mongo
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
