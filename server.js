@@ -35,7 +35,8 @@ app.use(
     secret: process.env.SECRET_KEY,
     resave: true,
     saveUninitialized: true,
-    store: MongoStore.create({ client: mongoose.connection.getClient() }), // Configura el almacenamiento de sesiones con connect-mongo
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_DB }), // Configura el almacenamiento de sesiones con connect-mongo
+
   })
 );
 
